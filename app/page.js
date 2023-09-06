@@ -1,6 +1,6 @@
 "use client"
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
-import React, { useMemo, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { OrbitControls } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { useControls } from 'leva'
@@ -11,7 +11,7 @@ const page = () => {
   const traingle = useLoader(GLTFLoader, '/models/traingle.glb')
   const leftWt = useLoader(GLTFLoader, '/models/leftWt.glb')
   const rightWt = useLoader(GLTFLoader, '/models/rightWt.glb')
-  const n = 1.8
+  const n = 1
 
 
   // function for setting the range
@@ -23,35 +23,52 @@ const page = () => {
 
   const options = useMemo(() => {
     return {
-      x: { value: 10, min: 5, max: 15, step: 1 },
-      // y: { value: 0, min: 0, max: Math.PI * 2, step: 0.01 },
-      // z: { value: 0, min: 0, max: Math.PI * 2, step: 0.01 },
+      Position: { value: 10, min: 5, max: 15, step: .01 },
+      Weight1: { value: 100, min: 100, max: 800, step: 50 },
+      Weight2: { value: 100, min: 100, max: 800, step: 50 },
       // visible: true,
       // color: { value: 'lime' },
     }
   }, [])
 
-  const traingleHandler = useControls('Base Position', options)
+  const Handler = useControls('Readings', options)
 
   // leva end
 
   const Plank = () => {
-    const plank = useLoader(GLTFLoader, '/models/plank.glb')
-    // const offset = [-0.33, 0.33, 0.33]
-    // const offset = [-0, 0.385166, 0]
-    const offset = [-.33, 0, 0]
+    let plank = useMemo(
+      () => [useLoader(GLTFLoader, '/models/plank.glb'), useLoader(GLTFLoader, '/models/plankL.glb'), useLoader(GLTFLoader, '/models/plankR.glb')],
+      []
+    )
+    const offset = [-trainglePositionHandler(Handler.Position), 0, 0]
+    const [count, setcount] = useState(0)
 
-    const mesh = useRef()
-
-    // reference to the threejs group
     const group = useRef()
+    const moreWtSide = (Handler.Weight1 * Handler.Position) - (Handler.Weight2 * (20 - Handler.Position))
+
+    useEffect(() => {
+      if (Handler.Weight1 > Handler.Weight2) {
+        setcount(1)
+      } else if (Handler.Weight1 < Handler.Weight2) {
+        setcount(2)
+      }
+      // group.current.rotation.z = 0
+      if (moreWtSide < 0) {
+        group.current.rotation.z = -Math.PI / 8
+      } else if (moreWtSide > 0) {
+        group.current.rotation.z = Math.PI / 8
+      } else {
+        group.current.rotation.z = 0
+      }
+    }, [])
+
+
 
 
     return (
-      // <group ref={group} rotation={[0, 0, Math.PI / 8]} position={[0.33, -0.33, -0.33]}> {/* Adjust the position to the right end */}
-      <group ref={group} rotation={[0, 0, 0]} position={[.33, 0.385166, -0]}> {/* Adjust the position to the right end */}
+      <group ref={group} rotation={[0, 0, 0]} position={[trainglePositionHandler(Handler.Position), 0.385166, -0]}> {/* Adjust the position to the right end */}
         <primitive
-          object={plank.scene}
+          object={plank[count].scene}
           position={offset}
           children-0-castShadow
         />
@@ -73,41 +90,45 @@ const page = () => {
           object={traingle.scene}
           position={
             [
-              trainglePositionHandler(traingleHandler.x),
+              trainglePositionHandler(Handler.Position),
               0,
               0
             ]
           }
           children-0-castShadow
         />
+
         {/* traingle end */}
 
         {/* leftWt start */}
-        <primitive
+        {/* <primitive
           object={leftWt.scene}
           position={[0, 0, 0]}
           children-0-castShadow
-        />
+        /> */}
         {/* leftWt end */}
 
         {/* rightWt start */}
-        <primitive
+        {/* <primitive
           object={rightWt.scene}
           // formula for this equation with respect to the scale
           // 1 = 1
           // 2 = 1.25
           // 3 = 1.50
           // value = 1 + (0.25 * (n - 1))
+
+          // 0.51 + (value - 5) * 0.04;
           position={
             [
               0.782943,
-              (0.610676) * (1 + (0.25 * (n - 1))),
+              ((-0.51 + (Handler.x - 5) * 0.04) + ((0.610676) * (1 + (0.25 * (n - 1))))),
+              // Handler.y,
               0
             ]
           }
           children-0-castShadow
           scale={n}
-        />
+        /> */}
         {/* rightWt end */}
 
 
