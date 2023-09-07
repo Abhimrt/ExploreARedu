@@ -16,7 +16,7 @@ const page = () => {
 
   useEffect(() => {
     if (vid) getVideo();
-    setdimension({ width: `${background.current.offsetWidth}px`, height: `${background.current.offsetHeight}px` })
+    setdimension({ width: `${background.current.offsetWidth}px`, height: `${background.current.offsetHeight + 100}px` })
     // console.log(background.current.offsetWidth, background.current.offsetHeight)
 
 
@@ -133,7 +133,7 @@ const page = () => {
       <section className='center' ref={vid ? null : background} style={vid ? dimension : {}}>
         <Canvas camera={{ position: [-10, 8, 10] }}>
           {!vid && <Env />}
-          <group position={[0, -.5, 0]} scale={6}>
+          <group position={[0, -.5, 0]} scale={vid ? 8 : 6}>
             {/* Plank start */}
             <Plank />
             <ContactShadows position={[0, 1, 0]} color="#808080" />
@@ -160,8 +160,8 @@ const page = () => {
           <directionalLight position={[1, 2, 3]} intensity={0.8} />
           <OrbitControls />
         </Canvas>
-        <button type="button" onClick={() => setvid(!vid)} class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 fixed bottom-5">Default</button>
       </section>
+      <button type="button" onClick={() => setvid(!vid)} class="z-10 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 fixed bottom-5">{vid ? "Switch 3d" : "Switch AR"}</button>
 
     </main>
   )
