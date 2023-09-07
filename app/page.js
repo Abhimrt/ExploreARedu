@@ -1,17 +1,55 @@
 "use client"
-import { Canvas, useFrame, useLoader } from '@react-three/fiber'
+import { Canvas, useLoader } from '@react-three/fiber'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { OrbitControls } from '@react-three/drei'
+import { ARCanvas, useHitTest } from "@react-three/xr";
+import { ContactShadows, Environment, OrbitControls } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { useControls } from 'leva'
-import { Racing_Sans_One } from 'next/font/google'
 
 const page = () => {
 
-  const traingle = useLoader(GLTFLoader, '/models/traingle.glb')
-  const leftWt = useLoader(GLTFLoader, '/models/leftWt.glb')
-  const rightWt = useLoader(GLTFLoader, '/models/rightWt.glb')
-  const n = 1
+  const background = useRef()
+  // const vid = false
+  const [vid, setvid] = useState(false)
+  const [dimension, setdimension] = useState({ width: "auto", height: "auto" });
+  const [traingle, setTraingle] = useState(null);
+
+  useEffect(() => {
+    if (vid) getVideo();
+    setdimension({ width: `${background.current.offsetWidth}px`, height: `${background.current.offsetHeight}px` })
+    // console.log(background.current.offsetWidth, background.current.offsetHeight)
+
+
+    const loadTraingle = async () => {
+      try {
+        const loadedTraingle = await new Promise((resolve, reject) => {
+          new GLTFLoader().load('/models/traingle.glb', resolve, undefined, reject);
+        });
+        setTraingle(loadedTraingle);
+      } catch (error) {
+        console.error('Error loading traingle.glb:', error);
+      }
+    };
+
+    loadTraingle();
+  }, [background, vid]);
+
+  let stream
+
+  const getVideo = () => {
+    navigator.mediaDevices
+      .getUserMedia({ video: { width: 300 } })
+      .then(gstream => {
+        stream = gstream
+        let video = background.current;
+        video.srcObject = stream;
+        video.play();
+      })
+      .catch(err => {
+        console.error("error:", err);
+      });
+  };
+
 
 
   // function for setting the range
@@ -26,8 +64,6 @@ const page = () => {
       Position: { value: 10, min: 5, max: 15, step: .01 },
       Weight1: { value: 100, min: 100, max: 800, step: 50 },
       Weight2: { value: 100, min: 100, max: 800, step: 50 },
-      // visible: true,
-      // color: { value: 'lime' },
     }
   }, [])
 
@@ -52,13 +88,12 @@ const page = () => {
       } else if (Handler.Weight1 < Handler.Weight2) {
         setcount(2)
       }
-      // group.current.rotation.z = 0
-      if (moreWtSide < 0) {
+      if (moreWtSide < 10 && moreWtSide > -10) {
+        group.current.rotation.z = 0
+      } else if (moreWtSide < 0) {
         group.current.rotation.z = -Math.PI / 8
       } else if (moreWtSide > 0) {
         group.current.rotation.z = Math.PI / 8
-      } else {
-        group.current.rotation.z = 0
       }
     }, [])
 
@@ -76,67 +111,59 @@ const page = () => {
     )
   }
 
+  function Env() {
+    return (
+      <Environment
+        files={"./images/lebombo_1k.exr"}
+        background
+        ground={{
+          height: 20,
+          radius: 40,
+          scale: 70,
+        }}
+        receiveShadow
+      />
+    );
+  }
+
 
   return (
-    <section className='center'>
-      <Canvas camera={{ position: [0, 0, 2] }}>
-        {/* Plank start */}
-        <Plank />
-        {/* Plank end */}
+    <main className='center w-screen h-screen'>
+      {vid && <video ref={background} className="cam"></video>}
+      <section className='center' ref={vid ? null : background} style={vid ? dimension : {}}>
+        <Canvas camera={{ position: [-10, 8, 10] }}>
+          {!vid && <Env />}
+          <group position={[0, -.5, 0]} scale={6}>
+            {/* Plank start */}
+            <Plank />
+            <ContactShadows position={[0, 1, 0]} color="#808080" />
+            {/* Plank end */}
 
 
-        {/* traingle start */}
-        <primitive
-          object={traingle.scene}
-          position={
-            [
-              trainglePositionHandler(Handler.Position),
-              0,
-              0
-            ]
-          }
-          children-0-castShadow
-        />
-
-        {/* traingle end */}
-
-        {/* leftWt start */}
-        {/* <primitive
-          object={leftWt.scene}
-          position={[0, 0, 0]}
-          children-0-castShadow
-        /> */}
-        {/* leftWt end */}
-
-        {/* rightWt start */}
-        {/* <primitive
-          object={rightWt.scene}
-          // formula for this equation with respect to the scale
-          // 1 = 1
-          // 2 = 1.25
-          // 3 = 1.50
-          // value = 1 + (0.25 * (n - 1))
-
-          // 0.51 + (value - 5) * 0.04;
-          position={
-            [
-              0.782943,
-              ((-0.51 + (Handler.x - 5) * 0.04) + ((0.610676) * (1 + (0.25 * (n - 1))))),
-              // Handler.y,
-              0
-            ]
-          }
-          children-0-castShadow
-          scale={n}
-        /> */}
-        {/* rightWt end */}
+            {/* traingle start */}
+            {traingle && <primitive
+              object={traingle.scene}
+              position={
+                [
+                  trainglePositionHandler(Handler.Position),
+                  0,
+                  0
+                ]
+              }
+              children-0-castShadow
+            />}
+          </group>
 
 
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[1, 2, 3]} intensity={0.8} />
-        <OrbitControls />
-      </Canvas>
-    </section>
+
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[1, 2, 3]} intensity={0.8} />
+          <OrbitControls />
+        </Canvas>
+        <button type="button" onClick={() => setvid(!vid)} class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 fixed bottom-5">Default</button>
+      </section>
+
+    </main>
   )
 }
 

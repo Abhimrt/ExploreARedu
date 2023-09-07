@@ -23,8 +23,21 @@
 }
 
 section {
+  position: fixed;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+}
+
+.cam {
+  width: 80%;
+  /* margin: auto; */
+  /* height: 100%; */
+  /* max-width: 100vw; */
+  /* max-height: 100vh; */
 }
 
 body {

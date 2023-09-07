@@ -11,6 +11,7 @@
   "dependencies": {
     "@react-three/drei": "^9.82.0",
     "@react-three/fiber": "^8.14.1",
+    "@react-three/xr": "^5.7.1",
     "autoprefixer": "10.4.15",
     "leva": "^0.9.35",
     "next": "13.4.19",
