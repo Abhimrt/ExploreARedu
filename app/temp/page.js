@@ -16,14 +16,6 @@ const ARScene = () => {
     scene.add(cube);
   };
 
-  useFrame(({ scene }) => {
-    // Check if AR is ready
-    if (arRef.current) {
-      // Add the cube to the scene once AR is ready
-      addCubeToScene(scene);
-    }
-  });
-
   return (
     <>
       <ARButton ar={arRef} />
@@ -31,10 +23,45 @@ const ARScene = () => {
         <XR>
           <Hands />
         </XR>
+        <pointLight intensity={1} position={[0, 3, 0]} />
+        <ambientLight intensity={0.5} />
+        <axesHelper />
+        <primitive object={arRef} />
+        <group>
+          <mesh>
+            <boxGeometry />
+            <meshBasicMaterial color="blue" />
+          </mesh>
+        </group>
+        <group>
+          <mesh>
+            <boxGeometry />
+            <meshBasicMaterial color="red" />
+          </mesh>
+        </group>
+        <group>
+          <mesh>
+            <boxGeometry />
+            <meshBasicMaterial color="green" />
+          </mesh>
+        </group>
+        <group>
+          <mesh>
+            <boxGeometry />
+            <meshBasicMaterial color="yellow" />
+          </mesh>
+        </group>
+        <group>
+          <mesh>
+            <boxGeometry />
+            <meshBasicMaterial color="purple" />
+          </mesh>
+        </group>
       </Canvas>
     </>
   );
 };
+
 
 export default ARScene;
 
