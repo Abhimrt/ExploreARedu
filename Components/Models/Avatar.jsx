@@ -30,9 +30,9 @@ export function AvatarGlb({ gesture }) {
   // leva end
 
   useEffect(() => {
-    if (gesture) {
+    if (gesture || actions[gesture]) {
       actions[gesture].reset().fadeIn(0.5).play();
-      return () => actions[gesture].fadeOut(0.5);
+      // return () => actions[gesture].fadeOut(0.5);
     }
   }, [gesture])
 
