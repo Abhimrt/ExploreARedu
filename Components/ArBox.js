@@ -102,7 +102,7 @@ const ArBox = () => {
                 <ambientLight intensity={0.5} />
                 <axesHelper />
                 <primitive object={arRef} />
-                <group position={[0, -.5, 0]} scale={6}>
+                <group position={[0, -.5, 0]} scale={.5}>
                     {/* Plank start */}
                     <Plank />
                     <ContactShadows position={[0, 1, 0]} color="#808080" />
