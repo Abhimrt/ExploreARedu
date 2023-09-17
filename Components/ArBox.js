@@ -98,10 +98,9 @@ const ArBox = () => {
                 <XR>
                     <Hands />
                 </XR>
-                <pointLight intensity={1} position={[0, 3, 0]} />
-                <ambientLight intensity={0.5} />
+                <ambientLight intensity={1} />
                 <axesHelper />
-                <primitive object={arRef} />
+                {/* <primitive object={arRef} /> */}
                 <group position={[0, -.5, 0]} scale={.5}>
                     {/* Plank start */}
                     <Plank />
