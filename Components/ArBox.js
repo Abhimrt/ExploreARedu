@@ -96,31 +96,30 @@ const ArBox = () => {
             <ARButton ar={arRef} />
             <Canvas>
                 <XR>
-                    <Hands />
+                    <ambientLight intensity={1} />
+                    <axesHelper />
+                    {/* <primitive object={arRef} /> */}
+                    <group position-z={-5} scale={.5}>
+                        {/* Plank start */}
+                        <Plank />
+                        <ContactShadows position={[0, 1, 0]} color="#808080" />
+                        {/* Plank end */}
+
+
+                        {/* traingle start */}
+                        {traingle && <primitive
+                            object={traingle.scene}
+                            position={
+                                [
+                                    trainglePositionHandler(Handler.Position),
+                                    0,
+                                    0
+                                ]
+                            }
+                            children-0-castShadow
+                        />}
+                    </group>
                 </XR>
-                <ambientLight intensity={1} />
-                <axesHelper />
-                {/* <primitive object={arRef} /> */}
-                <group position={[0, -.5, 0]} scale={.5}>
-                    {/* Plank start */}
-                    <Plank />
-                    <ContactShadows position={[0, 1, 0]} color="#808080" />
-                    {/* Plank end */}
-
-
-                    {/* traingle start */}
-                    {traingle && <primitive
-                        object={traingle.scene}
-                        position={
-                            [
-                                trainglePositionHandler(Handler.Position),
-                                0,
-                                0
-                            ]
-                        }
-                        children-0-castShadow
-                    />}
-                </group>
             </Canvas>
             <Leva collapsed />
         </>
