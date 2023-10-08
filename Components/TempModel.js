@@ -37,3 +37,4 @@ export default function TempModel(props) {
 }
 
 useGLTF.preload('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/solar-panel/model.gltf')
+

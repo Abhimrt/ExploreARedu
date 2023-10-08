@@ -1,11 +1,11 @@
-import Ar from '@/Components/Refrence/Ar'
-import ArBox from '@/Components/TorqueAR'
+
+import ArBox from '@/Components/ArBox'
 import React from 'react'
 
 const page = () => {
   return (
 
-    <Ar />
+    <ArBox />
   )
 }
 
