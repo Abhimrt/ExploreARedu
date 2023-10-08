@@ -4,6 +4,7 @@ import React from 'react'
 import Cube from './Cube'
 import { ARButton, XR } from '@react-three/xr'
 import ArHit from './ArHit'
+import TorqueAR from '../TorqueAR'
 
 const Ar = () => {
     return (

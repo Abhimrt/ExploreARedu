@@ -1,19 +1,18 @@
 "use client"
-// components/ARScene.js
-import { ARButton, XR, Hands } from '@react-three/xr';
-import { Canvas, useLoader } from '@react-three/fiber'
+import { useLoader } from '@react-three/fiber'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { ContactShadows } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { Leva, useControls } from 'leva'
+import { useControls } from 'leva'
+import ArHit from './Refrence/ArHit'
 
-const ArBox = () => {
+const TorqueAR = (props) => {
     const arRef = useRef();
 
     const [traingle, setTraingle] = useState(null);
 
     useEffect(() => {
-
+        console.log("tourque")
         const loadTraingle = async () => {
             try {
                 const loadedTraingle = await new Promise((resolve, reject) => {
@@ -93,39 +92,33 @@ const ArBox = () => {
 
     return (
         <>
-            <ARButton ar={arRef} />
-            <Canvas>
-                <XR>
-                    <ambientLight intensity={1} />
-                    <axesHelper />
-                    {/* <primitive object={arRef} /> */}
-                    <group position-z={-5} scale={.5}>
-                        {/* Plank start */}
-                        <Plank />
-                        <ContactShadows position={[0, 1, 0]} color="#808080" />
-                        {/* Plank end */}
+            <ambientLight intensity={1} />
+            <axesHelper />
+            {/* <primitive object={arRef} /> */}
+            <group props scale={.5}>
+                {/* Plank start */}
+                <Plank />
+                <ContactShadows position={[0, 1, 0]} color="#808080" />
+                {/* Plank end */}
 
 
-                        {/* traingle start */}
-                        {traingle && <primitive
-                            object={traingle.scene}
-                            position={
-                                [
-                                    trainglePositionHandler(Handler.Position),
-                                    0,
-                                    0
-                                ]
-                            }
-                            children-0-castShadow
-                        />}
-                    </group>
-                </XR>
-            </Canvas>
-            <Leva collapsed />
+                {/* traingle start */}
+                {traingle && <primitive
+                    object={traingle.scene}
+                    position={
+                        [
+                            trainglePositionHandler(Handler.Position),
+                            0,
+                            0
+                        ]
+                    }
+                    children-0-castShadow
+                />}
+            </group>
         </>
     );
 };
 
 
-export default ArBox;
+export default TorqueAR;
 

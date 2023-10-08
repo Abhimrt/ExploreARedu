@@ -2,6 +2,7 @@
 import { OrbitControls } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import React, { useRef } from 'react'
+import ArHit from './ArHit'
 
 const Cube = ({ position }) => {
     const cubeRef = useRef()

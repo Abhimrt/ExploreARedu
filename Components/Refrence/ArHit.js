@@ -1,10 +1,12 @@
 "use client"
 import { OrbitControls } from '@react-three/drei'
 import { Interactive, useHitTest, useXR } from '@react-three/xr'
-import React, { useRef, useState } from 'react'
+import React, { Children, useRef, useState } from 'react'
 import Cube from './Cube'
+import TempModel from '../TempModel'
+import TorqueAR from '../TorqueAR'
 
-const ArHit = () => {
+const ArHit = ({ Child }) => {
 
     const rectRef = useRef()
     const [cubes, setCubes] = useState([])
@@ -19,7 +21,11 @@ const ArHit = () => {
     const placeCube = (e) => {
         let position = e.intersection.object.position.clone()
         let id = Date.now();
-        setCubes([...cubes, { position, id }])
+        setCubes([
+            // uncomment if you want to show multiple elements on clicking on the pointer
+            // ...cubes,
+            { position, id }
+        ])
     }
 
     return (
@@ -29,10 +35,16 @@ const ArHit = () => {
             {isPresenting &&
                 cubes.map(({ position, id }) => {
                     return (
-                        <Cube position={position} key={id} />
+                        <group position={position} key={id} >
+                            {/* <TempModel position={position} key={id} /> */}
+                            <TorqueAR position={position} key={id} />
+                            {Child}
+                        </group>
                     )
                 })
+
             }
+            {Child}
             <Interactive onSelect={placeCube}>
 
                 <mesh ref={rectRef} rotation-x={Math.PI / 2}>
