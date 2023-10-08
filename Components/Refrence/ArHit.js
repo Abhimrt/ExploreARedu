@@ -36,8 +36,8 @@ const ArHit = ({ Child }) => {
                 cubes.map(({ position, id }) => {
                     return (
                         <group position={position} key={id} >
-                            {/* <TempModel position={position} key={id} /> */}
-                            <TorqueAR position={position} key={id} />
+                            <TempModel position={position} key={id} />
+                            {/* <TorqueAR position={position} key={id} /> */}
                             {Child}
                         </group>
                     )
