@@ -2,11 +2,12 @@
 // components/ARScene.js
 import { ARButton, XR, Hands } from '@react-three/xr';
 import { Canvas, useLoader } from '@react-three/fiber'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { ContactShadows, OrbitControls } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Leva, useControls } from 'leva'
 import Cube from './Refrence/Cube';
+import Loader from './Loader';
 
 const ArBox = () => {
     const arRef = useRef();
@@ -112,33 +113,37 @@ const ArBox = () => {
                     <axesHelper />
                     {/* <primitive object={arRef} /> */}
                     {/* <Cube position={[0, 2, -5]} /> */}
-                    <group
-                        position={[
-                            location.x,
-                            location.y,
-                            location.z
-                        ]}
-                        scale={location.scale}
-                    >
-                        {/* Plank start */}
-                        <Plank />
-                        <ContactShadows position={[0, 1, 0]} color="#808080" />
-                        {/* Plank end */}
+                    <center>
+                        <Suspense fallback={<Html><Loader /></Html>}>
+                            <group
+                                position={[
+                                    location.x,
+                                    location.y,
+                                    location.z
+                                ]}
+                                scale={location.scale}
+                            >
+                                {/* Plank start */}
+                                <Plank />
+                                <ContactShadows position={[0, 1, 0]} color="#808080" />
+                                {/* Plank end */}
 
 
-                        {/* traingle start */}
-                        {traingle && <primitive
-                            object={traingle.scene}
-                            position={
-                                [
-                                    trainglePositionHandler(Handler.Position),
-                                    0,
-                                    0
-                                ]
-                            }
-                            children-0-castShadow
-                        />}
-                    </group>
+                                {/* traingle start */}
+                                {traingle && <primitive
+                                    object={traingle.scene}
+                                    position={
+                                        [
+                                            trainglePositionHandler(Handler.Position),
+                                            0,
+                                            0
+                                        ]
+                                    }
+                                    children-0-castShadow
+                                />}
+                            </group>
+                        </Suspense>
+                    </center>
                 </XR>
             </Canvas>
             <Leva collapsed />
