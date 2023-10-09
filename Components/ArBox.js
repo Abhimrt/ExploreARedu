@@ -49,10 +49,10 @@ const ArBox = () => {
 
     const control = useMemo(() => {
         return {
-            x: { value: 0, min: -2, max: 10, step: 1 },
-            y: { value: 1, min: -2, max: 10, step: 1 },
-            z: { value: -5, min: -10, max: 10, step: 1 },
-            scale: { value: 1, min: .3, max: 5, step: .1 }
+            x: { value: 0, min: -20, max: 20, step: .1 },
+            y: { value: 1, min: -20, max: 20, step: .1 },
+            z: { value: -5, min: -20, max: 20, step: .1 },
+            scale: { value: 1, min: .3, max: 10, step: .1 }
         }
     }, [])
 
