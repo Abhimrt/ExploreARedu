@@ -101,7 +101,7 @@ const ArBox = () => {
                     <axesHelper />
                     {/* <primitive object={arRef} /> */}
                     {/* <Cube position={[0, 2, -5]} /> */}
-                    <group position={[0, 2, -5]} scale={.8}>
+                    <group position={[0, 1, -5]} scale={1}>
                         {/* Plank start */}
                         <Plank />
                         <ContactShadows position={[0, 1, 0]} color="#808080" />

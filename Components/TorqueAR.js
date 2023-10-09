@@ -95,7 +95,7 @@ const TorqueAR = (props) => {
             <ambientLight intensity={1} />
             <axesHelper />
             {/* <primitive object={arRef} /> */}
-            <group props scale={.5}>
+            <group {...props} scale={.5}>
                 {/* Plank start */}
                 <Plank />
                 <ContactShadows position={[0, 1, 0]} color="#808080" />
