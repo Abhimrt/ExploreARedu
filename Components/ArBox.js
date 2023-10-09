@@ -3,7 +3,7 @@
 import { ARButton, XR, Hands } from '@react-three/xr';
 import { Canvas, useLoader } from '@react-three/fiber'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { ContactShadows } from '@react-three/drei'
+import { ContactShadows, OrbitControls } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Leva, useControls } from 'leva'
 import Cube from './Refrence/Cube';
@@ -97,11 +97,12 @@ const ArBox = () => {
             <ARButton ar={arRef} />
             <Canvas>
                 <XR>
+                    <OrbitControls />
                     <ambientLight intensity={1} />
                     <axesHelper />
                     {/* <primitive object={arRef} /> */}
                     {/* <Cube position={[0, 2, -5]} /> */}
-                    <group position={[0, 1, -5]} scale={1}>
+                    <group position={[0, 1, -5]} scale={1.5}>
                         {/* Plank start */}
                         <Plank />
                         <ContactShadows position={[0, 1, 0]} color="#808080" />
