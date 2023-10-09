@@ -6,6 +6,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { ContactShadows } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Leva, useControls } from 'leva'
+import Cube from './Refrence/Cube';
 
 const ArBox = () => {
     const arRef = useRef();
@@ -99,7 +100,8 @@ const ArBox = () => {
                     <ambientLight intensity={1} />
                     <axesHelper />
                     {/* <primitive object={arRef} /> */}
-                    <group position-z={-5} scale={.5}>
+                    {/* <Cube position={[0, 2, -5]} /> */}
+                    <group position={[0, 2, -5]} scale={.8}>
                         {/* Plank start */}
                         <Plank />
                         <ContactShadows position={[0, 1, 0]} color="#808080" />
