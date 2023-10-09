@@ -46,6 +46,17 @@ const ArBox = () => {
 
     const Handler = useControls('Readings', options)
 
+    const control = useMemo(() => {
+        return {
+            x: { value: 0, min: -2, max: 10, step: 1 },
+            y: { value: 1, min: -2, max: 10, step: 1 },
+            z: { value: -5, min: -10, max: 10, step: 1 },
+            scale: { value: 1, min: .3, max: 5, step: .1 }
+        }
+    }, [])
+
+    const location = useControls('Positions', control)
+
     // leva end
 
     const Plank = () => {
@@ -97,12 +108,18 @@ const ArBox = () => {
             <ARButton ar={arRef} />
             <Canvas>
                 <XR>
-                    <OrbitControls />
                     <ambientLight intensity={1} />
                     <axesHelper />
                     {/* <primitive object={arRef} /> */}
                     {/* <Cube position={[0, 2, -5]} /> */}
-                    <group position={[0, 1, -5]} scale={1.5}>
+                    <group
+                        position={[
+                            location.x,
+                            location.y,
+                            location.z
+                        ]}
+                        scale={location.scale}
+                    >
                         {/* Plank start */}
                         <Plank />
                         <ContactShadows position={[0, 1, 0]} color="#808080" />
