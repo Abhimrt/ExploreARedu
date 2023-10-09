@@ -3,7 +3,7 @@
 import { ARButton, XR, Hands } from '@react-three/xr';
 import { Canvas, useLoader } from '@react-three/fiber'
 import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react'
-import { ContactShadows, Html, OrbitControls } from '@react-three/drei'
+import { Center, ContactShadows, Html, OrbitControls } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Leva, useControls } from 'leva'
 import Cube from './Refrence/Cube';
@@ -113,7 +113,7 @@ const ArBox = () => {
                     <axesHelper />
                     {/* <primitive object={arRef} /> */}
                     {/* <Cube position={[0, 2, -5]} /> */}
-                    <center>
+                    <Center>
                         <Suspense fallback={<Html><Loader /></Html>}>
                             <group
                                 position={[
@@ -143,7 +143,7 @@ const ArBox = () => {
                                 />}
                             </group>
                         </Suspense>
-                    </center>
+                    </Center>
                 </XR>
             </Canvas>
             <Leva collapsed />
