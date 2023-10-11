@@ -65,7 +65,7 @@ const page = () => {
                     <p className='border shadow-md m-2 p-2 px-4 '>{theory.formula1}</p> */}
                 </div>
                 <div className='w-screen center flex-wrap'>
-                    <Link href="/class/11/prac1/3d"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none ">3D Model</button></Link>
+                    <Link href="/class/10/prac1/3d"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none ">3D Model</button></Link>
                 </div>
             </main>
         </div>
