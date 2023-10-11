@@ -46,6 +46,16 @@ const page = () => {
     const Handler = useControls('Readings', options)
 
 
+    const control = useMemo(() => {
+        return {
+            x: { value: 0, min: -20, max: 20, step: .1 },
+            y: { value: 1, min: -20, max: 20, step: .1 },
+            z: { value: -5, min: -20, max: 20, step: .1 },
+            scale: { value: .5, min: .3, max: 10, step: .1 }
+        }
+    }, [])
+
+    const location = useControls('Positions', control)
 
     // const ENV = useMemo(() => {
     //     return {
@@ -69,7 +79,12 @@ const page = () => {
             <Canvas camera={{ position: [-10, 12, 10] }}>
                 <XR>
                     <axesHelper />
-                    <group position={[0, 1, -5]} scale={.5}>
+                    <group position={[
+                        location.x,
+                        location.y,
+                        location.z
+                    ]}
+                        scale={location.scale}>
                         {/* tree start */}
                         {!Handler.SunVisible ?
                             tree && <primitive
