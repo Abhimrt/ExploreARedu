@@ -1,10 +1,10 @@
 "use client"
 import { Canvas, useLoader } from '@react-three/fiber'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { ARCanvas, useHitTest } from "@react-three/xr";
 import { ContactShadows, Environment, OrbitControls } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { useControls } from 'leva'
+import { Leva, useControls } from 'leva'
+import Link from 'next/link';
 
 const page = () => {
 
@@ -114,7 +114,7 @@ const page = () => {
     function Env() {
         return (
             <Environment
-                files={"./images/lebombo_1k.exr"}
+                files={"/images/lebombo_1k.exr"}
                 background
                 ground={{
                     height: 20,
@@ -157,11 +157,13 @@ const page = () => {
 
 
                     <ambientLight intensity={0.5} />
-                    <directionalLight position={[1, 2, 3]} intensity={0.8} />
+                    <directionalLight position={[1, 2, 3]} intensity={10} />
                     <OrbitControls />
                 </Canvas>
+                <Leva collapsed />
             </section>
-            <button type="button" onClick={() => setvid(!vid)} class="z-10 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 fixed bottom-5">{vid ? "Switch 3d" : "Switch AR"}</button>
+            {/* <button type="button" onClick={() => setvid(!vid)} class="z-10 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 fixed bottom-5">{vid ? "Switch 3d" : "Switch AR"}</button> */}
+            <Link href='/temp' type="button" class="z-10 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 fixed bottom-5">{vid ? "Switch 3d" : "Switch AR"}</Link>
 
         </main>
     )

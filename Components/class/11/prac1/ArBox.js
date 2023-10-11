@@ -1,13 +1,12 @@
 "use client"
 // components/ARScene.js
-import { ARButton, XR, Hands } from '@react-three/xr';
+import { ARButton, XR } from '@react-three/xr';
 import { Canvas, useLoader } from '@react-three/fiber'
 import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react'
-import { Center, ContactShadows, Html, OrbitControls } from '@react-three/drei'
+import { Center, ContactShadows, Html } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Leva, useControls } from 'leva'
-import Cube from './Refrence/Cube';
-import Loader from './Loader';
+import Loader from '../../../Loader';
 
 const ArBox = () => {
     const arRef = useRef();
@@ -110,6 +109,7 @@ const ArBox = () => {
             <Canvas>
                 <XR>
                     <ambientLight intensity={1} />
+                    <directionalLight position={[1, 2, 3]} intensity={10} />
                     <axesHelper />
                     {/* <primitive object={arRef} /> */}
                     {/* <Cube position={[0, 2, -5]} /> */}

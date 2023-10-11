@@ -11,12 +11,10 @@ const page = () => {
     const [voices, setVoices] = useState([]);
     const [num, setnum] = useState(1);
     const theory = {
-        heading1: "Torque",
-        description1: "Torque is a measure of the force that can cause an object to rotate about an axis. Just as force is what causes an object to accelerate in linear kinematics, torque is what causes an object to acquire angular acceleration.",
-        example1: "The seesaw principle is really a statement about the equilibrium of forces. On either side of the seesaw, gravity is acting on either body. and we need the forces to balance out. What it boils down to is the following simple Mathematical statement: w1d1 = w2d2, where Wi is the weight of a object and Di is that object's distance from the center of the seesaw.",
-        formula1: "Torque = Force × Length",
+        heading1: "Response of the plant to the direction of lightning",
+        description1: "The movement of plants due to gravity is called gravitropism. They also do respond to the light. The aerial parts respond positively and grow towards the light whereas the roots respond negatively and grow backward to light. The movement due to lights is known as phototropism.",
     }
-    const [text, setText] = useState(`Today we will discuss about ${theory.heading1}... ${theory.description1}... Let us understand with an example ${theory.example1}... Formula for ${theory.heading1} is ${theory.formula1}`);
+    const [text, setText] = useState(`Today we will discuss about ${theory.heading1}... ${theory.description1}`);
 
 
     useEffect(() => {
@@ -61,13 +59,13 @@ const page = () => {
                 <h1 className='text-6xl lg:text-5xl font-bold'>{theory.heading1}</h1>
                 <div className='m-3 text-lg'>
                     <p>{theory.description1}</p>
-                    <h3 className='text-3xl font-semibold mt-5' >Example</h3>
+                    {/* <h3 className='text-3xl font-semibold mt-5' >Example</h3>
                     <p className='border shadow-md m-2 p-2 px-4 '>{theory.example1}</p>
                     <h3 className='text-3xl font-semibold mt-5' >Formula</h3>
-                    <p className='border shadow-md m-2 p-2 px-4 '>{theory.formula1}</p>
+                    <p className='border shadow-md m-2 p-2 px-4 '>{theory.formula1}</p> */}
                 </div>
                 <div className='w-screen center flex-wrap'>
-                    <Link href="/ar"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none ">AR Model</button></Link>
+                    <Link href="/class/11/prac1/3d"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none ">3D Model</button></Link>
                 </div>
             </main>
         </div>
@@ -76,12 +74,9 @@ const page = () => {
 
 export default page
 
-// "heading1": "Torque",
-//       "description1": "Torque is a measure of the force that can cause an object to rotate about an axis. Just as force is what causes an object to accelerate in linear kinematics, torque is what causes an object to acquire angular acceleration.",
-//       "example1": "A person pushing a closed-door is applying a static torque because the door isn't rotating despite the force applied. Pedalling a cycle at a constant speed is also an example of static torque as there is no acceleration.",
-//       "formula1": "T = F × r × siny."
-
-// heading1	"Torque"
-// description1	"Torque is a measure of the force that can cause an object to rotate about an axis. Just as force is what causes an object to accelerate in linear kinematics, torque is what causes an object to acquire angular acceleration."
-// example1	"The seesaw principle is really a statement about the equilibrium of forces. On either side of the seesaw, gravity is acting on either body. and we need the forces to balance out. What it boils down to is the following simple Mathematical statement: w1d1 = w2d2 where Wi is the weight of a object and Di is that object's distance from the center of the seesaw."
-// formula1	"T = F × L"
+// {
+//     "heading1": "Response of the plant to the direction of lightning",
+//     "description1": "The movement of plants due to gravity is called gravitropism. They also do respond to the light. The aerial parts respond positively and grow towards the light whereas the roots respond negatively and grow backward to light. The movement due to lights is known as phototropism.",
+//     "example1": "",
+//     "formula1": ""
+//   }
