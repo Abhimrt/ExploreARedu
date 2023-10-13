@@ -3,7 +3,6 @@ import { AvatarGlb } from '@/Components/Models/Avatar'
 import { Center, ContactShadows, Html, OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import React, { Suspense } from 'react'
-import { HeatModel } from './Models/HeatWithFire'
 import Loader from './Loader'
 
 const Avatar = ({ gesture }) => {
@@ -16,7 +15,6 @@ const Avatar = ({ gesture }) => {
                     <AvatarGlb gesture={gesture} />
                 </Suspense>
             </Center>
-            {/* <HeatModel /> */}
             <ambientLight intensity={1} />
             <directionalLight position={[-5, 2, 3]} intensity={1} />
             <directionalLight position={[5, 2, 3]} intensity={1} />
