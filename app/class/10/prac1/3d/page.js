@@ -1,10 +1,11 @@
 "use client"
 import { Canvas, useLoader } from '@react-three/fiber'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { ContactShadows, Environment, OrbitControls } from '@react-three/drei'
+import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react'
+import { Center, ContactShadows, Environment, Html, OrbitControls } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Leva, useControls } from 'leva'
 import Link from 'next/link';
+import Loader from '@/Components/Loader'
 
 const page = () => {
     const [tree, setTree] = useState(null);
@@ -32,6 +33,10 @@ const page = () => {
 
         loadTraingle();
     }, []);
+
+    window.onbeforeunload = function () {
+        return "Data will be lost if you leave the page, are you sure?";
+    };
 
     // leva start
 
@@ -83,39 +88,42 @@ const page = () => {
 
             <section className='center' >
                 <Canvas camera={{ position: [-10, 12, 10] }}>
-                    <Env />
-                    <group position={[0, -.5, 0]} scale={1.7}>
-                        {/* tree start */}
-                        {!Handler.SunVisible ?
-                            tree && <primitive
-                                object={tree.scene}
-                                position={
-                                    [
-                                        0,
-                                        0,
-                                        0
-                                    ]
-                                }
-                                children-0-castShadow
-                            />
-                            : sunTree && <primitive
-                                object={sunTree.scene}
-                                position={
-                                    [
-                                        0,
-                                        0,
-                                        0
-                                    ]
-                                }
-                                rotation={
-                                    [
-                                        0, Handler.Position, 0
-                                    ]
-                                }
-                                children-0-castShadow
-                            />}
-                    </group>
-
+                    <Center>
+                        <Suspense fallback={<Html><Loader /></Html>}>
+                            <Env />
+                            <group position={[0, -.5, 0]} scale={1.7}>
+                                {/* tree start */}
+                                {!Handler.SunVisible ?
+                                    tree && <primitive
+                                        object={tree.scene}
+                                        position={
+                                            [
+                                                0,
+                                                0,
+                                                0
+                                            ]
+                                        }
+                                        children-0-castShadow
+                                    />
+                                    : sunTree && <primitive
+                                        object={sunTree.scene}
+                                        position={
+                                            [
+                                                0,
+                                                0,
+                                                0
+                                            ]
+                                        }
+                                        rotation={
+                                            [
+                                                0, Handler.Position, 0
+                                            ]
+                                        }
+                                        children-0-castShadow
+                                    />}
+                            </group>
+                        </Suspense>
+                    </Center>
 
 
                     <ambientLight intensity={0.5} />

@@ -1,10 +1,11 @@
 "use client"
 import { Canvas, useLoader } from '@react-three/fiber'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { ContactShadows, Environment, OrbitControls } from '@react-three/drei'
+import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react'
+import { Center, ContactShadows, Environment, Html, OrbitControls } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Leva, useControls } from 'leva'
 import Link from 'next/link';
+import Loader from '@/Components/Loader'
 
 const page = () => {
 
@@ -70,36 +71,40 @@ const page = () => {
         <main className='center w-screen h-screen'>
             <section className='center' >
                 <Canvas camera={{ position: [-10, 8, 10] }}>
-                    <Env />
-                    <group position={[0, -.5, 0]} scale={3}>
-                        {magnet1 && <primitive
-                            object={magnet1.scene}
-                            position={
-                                [
-                                    0,
-                                    0,
-                                    Handler.Position <= 1 ? Handler.reverse ? Handler.Position - 3 : Handler.Position - 2.14 : -2
-                                ]
-                            }
-                            children-0-castShadow
-                        />}
-                        {magnet2 && <primitive
-                            object={magnet2.scene}
-                            position={
-                                [
-                                    0,
-                                    0,
-                                    Handler.Position
-                                ]
-                            }
-                            rotation={
-                                [
-                                    0, Handler.reverse ? Math.PI : 0, 0
-                                ]
-                            }
-                            children-0-castShadow
-                        />}
-                    </group>
+                    <Center>
+                        <Suspense fallback={<Html><Loader /></Html>}>
+                            <Env />
+                            <group position={[0, -.5, 0]} scale={3}>
+                                {magnet1 && <primitive
+                                    object={magnet1.scene}
+                                    position={
+                                        [
+                                            0,
+                                            0,
+                                            Handler.Position <= 1 ? Handler.reverse ? Handler.Position - 3 : Handler.Position - 2.14 : -2
+                                        ]
+                                    }
+                                    children-0-castShadow
+                                />}
+                                {magnet2 && <primitive
+                                    object={magnet2.scene}
+                                    position={
+                                        [
+                                            0,
+                                            0,
+                                            Handler.Position
+                                        ]
+                                    }
+                                    rotation={
+                                        [
+                                            0, Handler.reverse ? Math.PI : 0, 0
+                                        ]
+                                    }
+                                    children-0-castShadow
+                                />}
+                            </group>
+                        </Suspense>
+                    </Center>
                     <ambientLight intensity={0.5} />
                     <directionalLight position={[1, 2, 3]} intensity={10} />
                     <OrbitControls

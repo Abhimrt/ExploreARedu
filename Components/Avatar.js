@@ -1,15 +1,22 @@
 "use client"
 import { AvatarGlb } from '@/Components/Models/Avatar'
-import { ContactShadows, OrbitControls } from '@react-three/drei'
+import { Center, ContactShadows, Html, OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import React from 'react'
+import React, { Suspense } from 'react'
+import { HeatModel } from './Models/HeatWithFire'
+import Loader from './Loader'
 
 const Avatar = ({ gesture }) => {
 
 
     return (
         <Canvas camera={{ position: [-1, 1, 3] }}>
-            <AvatarGlb gesture={gesture} />
+            <Center>
+                <Suspense fallback={<Html><Loader /></Html>}>
+                    <AvatarGlb gesture={gesture} />
+                </Suspense>
+            </Center>
+            {/* <HeatModel /> */}
             <ambientLight intensity={1} />
             <directionalLight position={[-5, 2, 3]} intensity={1} />
             <directionalLight position={[5, 2, 3]} intensity={1} />

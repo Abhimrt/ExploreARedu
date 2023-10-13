@@ -11,6 +11,7 @@ export function AvatarGlb({ gesture }) {
   const group = useRef()
   const { nodes, materials, animations } = useGLTF('/models/avatar.glb')
   const { actions } = useAnimations(animations, group)
+  console.log(animations)
 
   // animations name = [ "talking", "idle", "annoye", "accept"]
   const [animationName, setanimationName] = useState("accept");
@@ -58,4 +59,4 @@ export function AvatarGlb({ gesture }) {
   )
 }
 
-useGLTF.preload('/avatar.glb')
+useGLTF.preload('/models/avatar.glb')

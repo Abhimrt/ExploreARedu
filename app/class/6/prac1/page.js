@@ -33,7 +33,12 @@ const page = () => {
 
     const speakText = () => {
         // if (!text) return;
-        if (!synthesis) return;
+        if (isSpeaking) {
+            synthesis.cancel();
+            setgesture("idle");
+            setIsSpeaking(false);
+            return;
+        };
 
         const utterThis = new SpeechSynthesisUtterance(text);
         utterThis.voice = voices.find((voice) => voice.lang === 'en-US');
@@ -51,8 +56,7 @@ const page = () => {
     return (
         <div className='relative h-auto overflow-x-hidden'>
             <div className='center flex-col my-2 w-screen h-[420px] pb-4 fixed top-0  desBackground'>
-                {!isSpeaking && <button onClick={speakText} type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none ">Start Speaking</button>}
-                {isSpeaking && <button type="button" class="text-white bg-blue-700  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2  ">Speaking...</button>}
+                <button onClick={speakText} type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none ">{isSpeaking ? "Stop Speaking" : "Start Speaking"}</button>
 
                 <Avatar gesture={gesture} />
             </div>
@@ -64,7 +68,7 @@ const page = () => {
                     <p className='border shadow-md m-2 p-2 px-4 '>{theory.example1}</p>
                 </div>
                 <div className='w-screen center flex-wrap'>
-                    <Link href="/class/6/prac1/3d"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none ">3D Model</button></Link>
+                    <Link href="/class/6/prac1/3d"><button onClick={() => synthesis.cancel()} type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none ">3D Model</button></Link>
                 </div>
             </main>
         </div>

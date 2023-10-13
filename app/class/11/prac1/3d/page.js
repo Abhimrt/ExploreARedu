@@ -128,7 +128,7 @@ const page = () => {
 
 
     return (
-        <main className='center w-screen h-screen'>
+        <main className='center h-screen'>
             {vid && <video ref={background} className="cam"></video>}
             <section className='center' ref={vid ? null : background} style={vid ? dimension : {}}>
                 <Canvas camera={{ position: [-10, 8, 10] }}>
@@ -163,7 +163,7 @@ const page = () => {
                 <Leva collapsed />
             </section>
             {/* <button type="button" onClick={() => setvid(!vid)} class="z-10 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 fixed bottom-5">{vid ? "Switch 3d" : "Switch AR"}</button> */}
-            <Link href='/temp' type="button" class="z-10 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 fixed bottom-5">{vid ? "Switch 3d" : "Switch AR"}</Link>
+            <Link href='/class/11/prac1/ar' type="button" class="z-10 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 fixed bottom-5">{vid ? "Switch 3d" : "Switch AR"}</Link>
 
         </main>
     )

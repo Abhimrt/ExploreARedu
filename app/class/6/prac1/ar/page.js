@@ -81,7 +81,11 @@ const page = () => {
                         location.x,
                         location.y,
                         location.z
-                    ]}
+                    ]
+                    }
+                        rotation={[
+                            0, Math.PI / 4, 0
+                        ]}
                         scale={location.scale}>
                         {magnet1 && <primitive
                             object={magnet1.scene}
