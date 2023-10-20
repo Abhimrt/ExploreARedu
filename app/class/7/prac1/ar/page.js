@@ -5,6 +5,7 @@ import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { Center, ContactShadows, Html } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Leva, useControls } from 'leva'
+import { HeatWithFire } from '@/Components/HeatWithFire';
 
 const page = () => {
     const [withoutFire, setWithoutFire] = useState(null);
