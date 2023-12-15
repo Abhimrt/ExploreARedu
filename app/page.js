@@ -1,22 +1,28 @@
+import Nav from '@/Components/Nav'
 import Link from 'next/link'
 import React from 'react'
 
 const page = () => {
     return (
-        <div className='p-5'>
-            <h1 className='text-3xl font-bold m-5'>Select Class:</h1>
-            <div className='center flex-wrap'>
-                {/* class 6 */}
-                <div className='border shadow-md text-xl  py-2 px-4 rounded-md m-5 hover:shadow-lg transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-110  duration-300 '><Link href="/class/6/prac1" className='w-full' >Class VI Practical 1 </Link></div>
+        <div className=' absolute top-0 h-screen mainSection '>
+            <Nav />
+            <h1 className='text-6xl font-bold m-5 p-5'>Select Class:</h1>
+            <div className='flex justify-center content-center'>
+                <div className='center flex-wrap p-5 mainButtonSection lg:w-[50vw] sm:w-screen'>
+                    {/* class 6 */}
+                    <Link href="/class/6/prac1" className=' mainButton drop-shadow-lg' ><span>Class VI</span> <br /> Practical 1 </Link>
 
-                {/* class 7 */}
-                <div className='border shadow-md text-xl  py-2 px-4 rounded-md m-5 hover:shadow-lg transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-110  duration-300 '><Link href="/class/7/prac1" className='w-full' >Class VII Practical 1 </Link></div>
+                    {/* class 7 */}
+                    <Link href="/class/7/prac1" className=' mainButton drop-shadow-lg' ><span>Class VII</span> <br /> Practical 1 </Link>
 
-                {/* class 10 */}
-                <div className='border shadow-md text-xl  py-2 px-4 rounded-md m-5 hover:shadow-lg transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-110  duration-300 '><Link href="/class/10/prac1" className='w-full' >Class X Practical 1 </Link></div>
+                    {/* class 10 */}
+                    <Link href="/class/10/prac1" className=' mainButton drop-shadow-lg' ><span>Class X</span> <br /> Practical 1 </Link>
 
-                {/* class 11 */}
-                <div className='border shadow-md text-xl  py-2 px-4 rounded-md m-5 hover:shadow-lg transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-110  duration-300 '><Link href="/class/11/prac1" className='w-full' >Class XI Pracrical 1</Link></div>
+                    {/* class 11 */}
+                    <Link href="/class/11/prac1" className=' mainButton drop-shadow-lg' ><span>Class XI</span> <br /> Pracrical 1</Link>
+                </div>
+                <div className="mainImage lg:w-[40vw] sm:none aspect-square">
+                </div>
             </div>
         </div>
     )

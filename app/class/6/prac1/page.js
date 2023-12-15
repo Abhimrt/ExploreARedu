@@ -54,8 +54,8 @@ const page = () => {
 
 
     return (
-        <div className='relative h-auto overflow-x-hidden'>
-            <div className='center flex-col my-2 w-screen h-[420px] pb-4 fixed top-0  desBackground'>
+        <div className='relative h-auto overflow-x-hidden '>
+            <div className='center flex-col my-2 w-screen h-[420px] pb-4 fixed top-0  desBackground '>
                 <button onClick={speakText} type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none ">{isSpeaking ? "Stop Speaking" : "Start Speaking"}</button>
 
                 <Avatar gesture={gesture} />
